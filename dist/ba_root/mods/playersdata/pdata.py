@@ -64,6 +64,27 @@ def get_info(account_id: str) -> dict | None:
     return None
 
 
+def _safe_load_json(path):
+    """Load JSON from path, falling back to .backup, then returning default."""
+    data = {}
+    for attempt in (path, path + ".backup"):
+        try:
+            with open(attempt, "r") as f:
+                data = json.load(f)
+            break
+        except FileNotFoundError:
+            continue
+    return data
+
+
+def _safe_dump_json(path, data):
+    """Write JSON to path, backing up the previous file first."""
+    if os.path.exists(path):
+        shutil.copyfile(path, path + ".backup")
+    with open(path, "w") as f:
+        json.dump(data, f, indent=4)
+
+
 def get_profiles() -> dict:
     """Returns the profiles of all players.
 
@@ -74,25 +95,23 @@ def get_profiles() -> dict:
     """
     if CacheData.profiles == {}:
         try:
-            if os.stat(PLAYERS_DATA_PATH + "profiles.json").st_size > 1000000:
+            if os.path.exists(PLAYERS_DATA_PATH + "profiles.json") and \
+               os.stat(PLAYERS_DATA_PATH + "profiles.json").st_size > 1000000:
                 newpath = f'{PLAYERS_DATA_PATH}profiles-{str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))}.json'
                 shutil.copyfile(PLAYERS_DATA_PATH + "profiles.json", newpath)
                 profiles = {"pb-sdf": {}}
                 print("Resetting Profiles.")
             else:
-                f = open(PLAYERS_DATA_PATH + "profiles.json", "r")
-                profiles = json.load(f)
-                f.close()
-                print("Loading old profiles.json")
+                profiles = _safe_load_json(PLAYERS_DATA_PATH + "profiles.json")
+                if profiles:
+                    print("Loading old profiles.json")
             CacheData.profiles = profiles
 
         except Exception as e:
-            f = open(PLAYERS_DATA_PATH + "profiles.json.backup", "r")
-            profiles = json.load(f)
+            profiles = _safe_load_json(PLAYERS_DATA_PATH + "profiles.json")
             print(e)
-            print("Exception occurred, falling back to profiles.json.backup")
+            print("Exception occurred, falling back")
             CacheData.profiles = profiles
-            f.close()
             return profiles
     else:
         return CacheData.profiles
@@ -410,17 +429,7 @@ def get_roles() -> dict:
         roles
     """
     if CacheData.roles == {}:
-        try:
-            f = open(PLAYERS_DATA_PATH + "roles.json", "r")
-            roles = json.load(f)
-            f.close()
-            CacheData.roles = roles
-        except Exception as e:
-            print(e)
-            f = open(PLAYERS_DATA_PATH + "roles.json.backup", "r")
-            roles = json.load(f)
-            f.close()
-            CacheData.roles = roles
+        CacheData.roles = _safe_load_json(PLAYERS_DATA_PATH + "roles.json")
     return CacheData.roles
 
 
@@ -598,22 +607,14 @@ def get_custom() -> dict:
         custom effects
     """
     if CacheData.custom == {}:
-        try:
-            f = open(PLAYERS_DATA_PATH + "custom.json", "r")
-            custom = json.load(f)
-            f.close()
-            CacheData.custom = custom
-        except:
-            f = open(PLAYERS_DATA_PATH + "custom.json.backup", "r")
-            custom = json.load(f)
-            f.close()
-            CacheData.custom = custom
-        for account_id in custom["customeffects"]:
-            custom["customeffects"][account_id] = [
-                custom["customeffects"][account_id]] if type(
-                custom["customeffects"][account_id]) is str else \
-                custom["customeffects"][account_id]
-
+        custom = _safe_load_json(PLAYERS_DATA_PATH + "custom.json")
+        if "customeffects" in custom:
+            for account_id in custom["customeffects"]:
+                custom["customeffects"][account_id] = [
+                    custom["customeffects"][account_id]] if type(
+                    custom["customeffects"][account_id]) is str else \
+                    custom["customeffects"][account_id]
+        CacheData.custom = custom
     return CacheData.custom
 
 
@@ -731,23 +732,14 @@ def load_cache():
 
 
 def dump_cache():
-    if CacheData.profiles != {}:
-        shutil.copyfile(PLAYERS_DATA_PATH + "profiles.json",
-                        PLAYERS_DATA_PATH + "profiles.json.backup")
-        profiles = copy.deepcopy(CacheData.profiles)
-        with open(PLAYERS_DATA_PATH + "profiles.json", "w") as f:
-            json.dump(profiles, f, indent=4)
-    if CacheData.roles != {}:
-        shutil.copyfile(PLAYERS_DATA_PATH + "roles.json",
-                        PLAYERS_DATA_PATH + "roles.json.backup")
-        roles = copy.deepcopy(CacheData.roles)
-        with open(PLAYERS_DATA_PATH + "roles.json", "w") as f:
-            json.dump(roles, f, indent=4)
-    if CacheData.custom != {}:
-        shutil.copyfile(PLAYERS_DATA_PATH + "custom.json",
-                        PLAYERS_DATA_PATH + "custom.json.backup")
-        custom = copy.deepcopy(CacheData.custom)
-        with open(PLAYERS_DATA_PATH + "custom.json", "w") as f:
-            json.dump(custom, f, indent=4)
+    if CacheData.profiles:
+        _safe_dump_json(PLAYERS_DATA_PATH + "profiles.json",
+                        copy.deepcopy(CacheData.profiles))
+    if CacheData.roles:
+        _safe_dump_json(PLAYERS_DATA_PATH + "roles.json",
+                        copy.deepcopy(CacheData.roles))
+    if CacheData.custom:
+        _safe_dump_json(PLAYERS_DATA_PATH + "custom.json",
+                        copy.deepcopy(CacheData.custom))
     time.sleep(60)
     dump_cache()
