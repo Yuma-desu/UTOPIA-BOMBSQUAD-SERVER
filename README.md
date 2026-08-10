@@ -1,123 +1,142 @@
-# Bombsquad-Ballistica-Modded-Server
+# UTOPIA BOMBSQUAD SERVER
 
-Modded server scripts to host ballistica (BombSquad) server. Running on BS1.7.53 (API 9)
+Modded server scripts to host Ballistica (BombSquad) dedicated servers. Running on Ballistica API 9 (server manager v1.3.5).
 
-``
-Migrated from API 7 TO API 9 , this might be unstable and missing some features. Use API 7 from this tag
-``
-[API7 ](https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server/releases/tag/1.7.26)
+> **Migrated from API 7 to API 9.** Some features may be unstable or missing.
+> For the previous API 7 build, see the [API 7 release](https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server/releases/tag/1.7.26).
 
-# Prerequisites
+## Prerequisites
 - Basic knowledge of Linux
 - A VPS (e.g. [Amazon Web Services](https://aws.amazon.com/), [Microsoft Azure](https://portal.azure.com/))
-- Any Linux distribution.
-  - It is recommended to use Ubuntu (minimum Ubuntu 22).
+- Any Linux distribution (Ubuntu 22+ recommended)
 - Python 3.13
-- 1 GB free Memory (Recommended 2 GB)
+- 1 GB free memory (2 GB recommended)
 
 ## Getting Started
-This assumes you are on Ubuntu or an Ubuntu based distribution.
+This assumes you are on Ubuntu or an Ubuntu-based distribution.
 
-Install `software-properties-common`
-```
+### Install `software-properties-common`
+```sh
 sudo apt install software-properties-common -y
 ```
-Add python Deadsnakes PPA
-```
+
+### Add Python Deadsnakes PPA
+```sh
 sudo add-apt-repository ppa:deadsnakes/ppa
 ```
-Install Python 3.13
-```
+
+### Install Python 3.13
+```sh
 sudo apt install python3.13 python3.13-dev python3.13-venv python3-pip -y
 ```
-Update installed and existing packages
-```
+
+### Update installed packages
+```sh
 sudo apt update && sudo apt upgrade
 ```
-Create a tmux session.
-```
+
+### Create a tmux session
+```sh
 tmux new -s 43210
 ```
-Download server files.
+
+### Clone & configure
+```sh
+git clone --depth=1 https://github.com/Yuma-desu/UTOPIA-BOMBSQUAD-SERVER
+cd UTOPIA-BOMBSQUAD-SERVER
 ```
-git clone --depth=1 https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server
-cd Bombsquad-Ballistica-Modded-Server
+
+### Edit the server config
+Edit `config.json` in the root directory to set server name, port, admins, playlist, team names, team colors, etc.
+
+```sh
+nano config.json
 ```
-Now edit config.yaml in root dir change server name, port, admins, playlist, team name etc..
-Making the server files executable.
-```
+
+### Make binaries executable
+```sh
 chmod 777 bombsquad_server
 chmod 777 dist/bombsquad_headless
 chmod 777 dist/bombsquad_headless_aarch64
 ```
-Starting the server
-```
+
+### Start the server
+```sh
 ./bombsquad_server
 ```
-If ports are open, you can connect to your server now.
 
-___
-### More Configuration
-Open `dist/ba_root/mods/setting.json` in your prefered editor and change values according to you.
+If your ports are open, you can connect to your server now.
 
-[How to edit settings.json](https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server/wiki/Server-Settings)
+---
 
-[Available chat commands](https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server/wiki/Chat-commands)
+## More Configuration
 
-___
-### Adding yourself as owner
-- Open `dist/ba_root/mods/playersData/roles.json` in your prefered editor.
-- Add your Pb-id in owner id list.
-- Restart your server
+Open `dist/ba_root/mods/setting.json` in your preferred editor and change values to match your setup.
 
-___
-### Managing players
-Open `dist/ba_root/mods/playersData/profiles.json` in your prefered editor.
+See the wiki for details:
+- [How to edit settings.json](https://github.com/Yuma-desu/UTOPIA-BOMBSQUAD-SERVER/wiki/Server-Settings)
+- [Available chat commands](https://github.com/Yuma-desu/UTOPIA-BOMBSQUAD-SERVER/wiki/Chat-commands)
+
+---
+
+## Adding yourself as Owner
+- Open `dist/ba_root/mods/playersData/roles.json` in your preferred editor.
+- Add your PB-ID to the owner ID list.
+- Restart the server.
+
+---
+
+## Managing Players
+Open `dist/ba_root/mods/playersData/profiles.json` in your preferred editor.
 
 Here you can ban players, mute them, or disable their kick votes.
 
+---
 
 ## Features
-- Rank System.
-- [Chat commands](https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server/wiki/Chat-commands).
-- V2 Account with cloud console for server.
-- check clients ping , use /ping chat command to check ping of any player._ba.get_client_ping().
-- Hide player specs from cleints, chatcommand /hideid /showid .
-- [Easy role management](https://github.com/imayushsaini/Bombsquad-Ballistica-Modded-Server/wiki/Chat-commands#role-management-system) , create 1000 of roles as you wish add specific chat command to the role , give tag to role ..many more.
-- Rejoin cooldown.
-- Leaderboard , top 3 rank players name on top right corner.
-- Restrict some player to start kick vote.
-- Allow server owners to join even when server is full by looking owner IP address which was used earlier(don't join by queue).
-- Auto kick fake accounts (unsigned/not verified by master server).
-- Auto enable/disable public queue when server is full.
-- Auto night mode.
-- Transparent Kickvote , can see who started kick vote for whom.
-- Kickvote msg to chat/screen , can choose to show kickvote start msg either as screen message or chat message.
-- Players IP Address and Device UUID tracking and banning.
-- Team Chat, send msg starting with (,) comma to deliver it to team mates only.
-- In game popup chat , send msg starting with (.) Dot to send in game popup msg.
-- Custom Voting System , type end in chat to start end vote or sm , nv, dv.
-- support for [Ballisitca-web-stats](https://github.com/imayushsaini/ballistica-web-stats).
-- Integrated Discord bot to sync live stats(current players, chats , all logs) to discord.
-- Execute chat command remotely from discord.
-- Many New mini games and maps.
-- Colourfull bomb explosion.
-- Floater
-- Auto stats reset after configured days .
-- Auto remove afk/idle players.
-- Auto check server updates.
-- All settings at one place ,no coding exp. required just edit settings.json 
-- Configurable Server Host name.
-- Character chooser , players can choose any character while joining .
-- Restrict New accounts to join or chat in server.
-- Custom characters , easy to load and use characters made by character maker.
-- Auto Team Balance , player shift to small team in dualteam mode.
-- Integrated ElPatronPowerups.
-- Auto switch to coop mode when players are less then threshold.
-- Change playlist on fly with playlist code or name , i.e /playlist teams , /playlist coop , /playlist 34532
-- rotate prop nodes with node.changerotation(x,y,z)
-- set 2d mode with _ba.set_2d_mode(true)
-- set 2d plane with _ba.set_2d_plane(z) - beta , not works with spaz.fly = true. 
-- New Splitted Team in game score screen.
-- New final score screen , StumbledScoreScreen.
-- other small small feature improvement here there find yourself.
+- **Rank System** — persistent player ranks and stats tracking
+- **[Chat Commands](https://github.com/Yuma-desu/UTOPIA-BOMBSQUAD-SERVER/wiki/Chat-commands)** — extensive set of in-game commands
+- **V2 Account** — cloud console support for server management
+- **Ping check** — `/ping` chat command to check any player's latency via `_ba.get_client_ping()`
+- **Hide/show player specs** — `/hideid` and `/showid` chat commands
+- **[Role management](https://github.com/Yuma-desu/UTOPIA-BOMBSQUAD-SERVER/wiki/Chat-commands#role-management-system)** — create custom roles with specific command access and tags
+- **Rejoin cooldown** — configurable delay before a player can rejoin
+- **Leaderboard** — top 3 ranked players displayed top-right corner
+- **Kick vote restrictions** — limit which players can start kick votes
+- **Owner priority join** — server owners can join even when full (bypasses queue via IP recognition)
+- **Auto-kick fake accounts** — unsigned/unverified accounts kicked automatically
+- **Auto public queue** — queue mode toggles on/off when server is full
+- **Auto night mode** — scheduled day/night visuals with fireflies
+- **Transparent kick votes** — see who started a kick vote and against whom
+- **Kick vote announcements** — configurable as chat message or screen message
+- **IP & Device UUID tracking** — ban by IP or device
+- **Team Chat** — prefix messages with `,` (comma) to send to teammates only
+- **In-game popup chat** — prefix messages with `.` (dot) to send popup messages
+- **Custom Voting System** — type `end`, `sm`, `nv`, or `dv` in chat for votes
+- **Ballistica Web Stats** — support for [ballistica-web-stats](https://github.com/imayushsaini/ballistica-web-stats)
+- **Discord Bot** — live sync of players, chats, and logs to Discord; execute chat commands remotely
+- **Many mini-games & maps** — 40+ custom game modes
+- **Colorful bomb explosions** — custom explosion colors
+- **Floater** — floating effect support
+- **Auto stats reset** — reset stats after a configurable number of days
+- **Auto AFK/idle removal** — kick inactive players (configurable lobby and in-game thresholds)
+- **Auto server update check** — checks for new server versions
+- **All settings in one place** — no coding required, just edit `setting.json`
+- **Configurable server host name**
+- **Character chooser** — players pick any character when joining
+- **New account restrictions** — minimum account age to join or chat
+- **Custom characters** — load characters made with the character maker
+- **Auto Team Balance** — moves players to balance teams in dual-team modes
+- **ElPatron Powerups** — integrated power-up system
+- **Auto coop mode** — switches to coop when player count is below threshold
+- **Playlist switching** — change playlists on the fly with `/playlist teams`, `/playlist coop`, `/playlist 34532`
+- **Rotate prop nodes** — `node.changerotation(x, y, z)`
+- **2D mode** — `_ba.set_2d_mode(true)` and `_ba.set_2d_plane(z)` (beta)
+- **Splitted Team score screen** — new in-game score display
+- **StumbledScoreScreen** — new final score screen
+- **MFA support** — enforce multi-factor authentication for specific accounts or all players
+- **Text on map** — configurable on-screen overlays (watermarks, highlight messages)
+- **Profanity filter** — chat moderation
+- **Whitelist mode** — restrict server access to whitelisted players only
+- **Max accounts per IP** — prevent multi-accounting
+- **Max players per device** — limit accounts per device
