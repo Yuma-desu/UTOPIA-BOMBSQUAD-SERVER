@@ -58,14 +58,14 @@
   },
   "discordWebHook": {
     "enable": true,
-    "webhookURL": "https://discord.com/api/webhooks/1536376204465283123/NdA1yneqIOpv8egwLTkBj_2Cg3rS_UHJ29JV5NAeg48jYSdzABmdfw5GmKBRb5Nuh6VC"
+    "webhookURL": "<your-discord-webhook-url-here>"
   },
   "discordbot": {
     "enable": false,
     "liveChat": true,
     "liveStatsChannelID": 1536376151285702837,
     "logsChannelID": 1536380990358949908,
-    "token": "MTUzNjM3OTUyMzgxNjM2MjAyNQ.GDTCOQ.jxPk5oDNsVDCgmsIgSr0t-7anrO_KuWcbqnUWU"
+    "token": "<your-bot-token-here>"
   },
   "elPatronPowerups": {
     "Quantity": {
