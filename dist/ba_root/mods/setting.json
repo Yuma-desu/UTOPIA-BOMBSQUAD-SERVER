@@ -1,17 +1,18 @@
 {
   "Anti-IdRevealer": false,
   "ChatCommands": {
-    "BrodcastCommand": true
+    "BrodcastCommand": false
   },
   "HostDeviceName": "v1.4",
-  "HostName": "BCSv2",
+  "HostName": "SONder",
   "KickVoteMsgType": "chat",
   "ScoreScreenAnnouncement": {
     "enable": true,
     "msg": [
       "click stats button to join discord",
-      "watch hey smoothy youtube channel",
-      "downlaod new mods from discord"
+      "Have fun :) and play fair",
+      "Invite your friends to join our server",
+      "🎴| UTOPIA EPIC TEAMS |🎴"
     ]
   },
   "ShowKickVoteStarterName": true,
@@ -19,26 +20,26 @@
   "WarnCooldownMinutes": 30,
   "afk_remover": {
     "enable": true,
-    "ingame_idle_time_in_secs": 60,
+    "ingame_idle_time_in_secs": 120,
     "kick_idle_from_lobby": true,
-    "lobby_idle_time_in_secs": 10
+    "lobby_idle_time_in_secs": 300
   },
-  "afterWarnKickMsg": "Enough warnings, Goodbye have a nice day :)",
+  "afterWarnKickMsg": "Enough warnings, have a nice day :)",
   "allowInGameChat": true,
   "allowTeamChat": true,
   "allowVotes": true,
   "autoNightMode": {
-    "enable": true,
+    "enable": false,
     "endTime": "06:00",
     "fireflies": true,
-    "fireflies_random_color": false,
+    "fireflies_random_color": true ,
     "startTime": "18:30"
   },
   "autoTeamBalance": true,
   "ballistica_web": {
     "enable": true,
-    "server_password": "my_secerT_password_very_hard",
-    "discord_link": "https://discord.gg/ucyaesh"
+    "server_password": "my_secerT_password_is_lowkenuinely_hard",
+    "discord_link": "https://discord.gg/jBj8tFuu2ah"
   },
   "character_chooser": {
     "enable": true
@@ -46,7 +47,7 @@
   "colorful_explosions": {
     "enable": true
   },
-  "colorfullMap": true,
+  "colorfullMap": false,
   "contributeData": true,
   "coopModeWithLessPlayers": {
     "enable": false,
@@ -56,15 +57,15 @@
     "enable": true
   },
   "discordWebHook": {
-    "enable": false,
-    "webhookURL": "https://discord.com/api/webhooks/82649239/e7s0zyBJIuczXL7_CGSO5WM"
+    "enable": true,
+    "webhookURL": "https://discord.com/api/webhooks/1536376204465283123/NdA1yneqIOpv8egwLTkBj_2Cg3rS_UHJ29JV5NAeg48jYSdzABmdfw5GmKBRb5Nuh6VC"
   },
   "discordbot": {
     "enable": false,
     "liveChat": true,
-    "liveStatsChannelID": 925440043672285200,
-    "logsChannelID": 925440079843958800,
-    "token": "<secret-token-here>"
+    "liveStatsChannelID": 1536376151285702837,
+    "logsChannelID": 1536380990358949908,
+    "token": "MTUzNjM3OTUyMzgxNjM2MjAyNQ.GDTCOQ.jxPk5oDNsVDCgmsIgSr0t-7anrO_KuWcbqnUWU"
   },
   "elPatronPowerups": {
     "Quantity": {
@@ -79,11 +80,11 @@
       "Impact Bombs": 3,
       "Impairment Bombs": 2,
       "Mine Bombs": 2,
-      "Punch": 3,
-      "Shield": 2,
-      "Speed": 2,
+      "Punch": 0,
+      "Shield": 0,
+      "Speed": 0,
       "Sticky Bombs": 3,
-      "Tank Shield": 1,
+      "Tank Shield": 0,
       "Triple": 3
     },
     "enable": false,
@@ -107,11 +108,11 @@
         "Impact Bombs": 3,
         "Impairment Bombs": 2,
         "Mine Bombs": 2,
-        "Punch": 3,
-        "Shield": 2,
-        "Speed": 2,
+        "Punch": 0,
+        "Shield": 0,
+        "Speed": 0,
         "Sticky Bombs": 3,
-        "Tank Shield": 1,
+        "Tank Shield": 0,
         "Triple": 3
       },
       "Tank Shield PTG": 96
@@ -125,7 +126,7 @@
   "enablerank": true,
   "enablestats": true,
   "enabletags": true,
-  "firstTimeJoinMsg": "Welcome to the server,we r saving all your account details and chats",
+  "firstTimeJoinMsg": "We are saving all your stats and date, please wait :)",
   "leaderboard": {
     "barsBehindName": true,
     "enable": true
@@ -141,7 +142,7 @@
   "newResultBoard": true,
   "playermod": {
     "default_bomb": "normal",
-    "default_bomb_count": 1,
+    "default_bomb_count": 2,
     "default_boxing_gloves": true,
     "default_shield": false
   },
@@ -156,9 +157,9 @@
   },
   "regularWelcomeMsg": "Welcome Back",
   "sameCharacterForTeam": false,
-  "statsResetAfterDays": 31,
+  "statsResetAfterDays": 45,
   "textonmap": {
-    "bottom left watermark": "Owner : <owner-name> \nEditor : <bablu>\nScripts : BCS1.7.51",
+    "bottom left watermark": "Owner : SENTIUM \nEditor : SENTIUM",
     "center highlights": {
       "color": [
         1,
@@ -166,14 +167,14 @@
         0
       ],
       "msg": [
-        "type end to start end vote",
-        "start msg with prefix .(dot) to send in game popup msg",
-        "start msg with prefix ,(comma) to send msg to teammates",
-        "BombSquad Community Server - BCS"
+        "Type end in chat to start end vote",
+        "Click the stats button to join our discord",
+        "Have fun :) and play fair",
+        "🎴| UTOPIA EPIC TEAMS |🎴"
       ],
       "randomColor": true
     },
-    "top watermark": "Welcome to server \nIP @IP PORT @PORT"
+    "top watermark": "🎴| UTOPIA EPIC TEAMS |🎴"
   },
   "useV2Account": false,
   "warnMsg": "WARNING !!!",
@@ -181,6 +182,6 @@
   "mfa" : {
     "enable": true,
     "enforce_for_all_players": false,
-    "enforce_for_accounts": [ "HeySmoothy", "test" ]
+    "enforce_for_accounts": [ "Sentium", "test" ]
   }
 }

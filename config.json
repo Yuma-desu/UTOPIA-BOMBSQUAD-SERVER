@@ -1,30 +1,30 @@
 {
-   "party_name":"BombSquad Community Server",
+   "party_name":"🎴| UTOPIA EPIC TEAMS |🎴",
    "party_is_public":true,
    "authenticate_clients":true,
    "admins":[
-      "pb-yOuRAccOuNtIdHErE",
+      "pb-IF4eUGQzVA==",
       "pb-aNdMayBeAnotherHeRE"
    ],
    "enable_default_kick_voting":true,
    "port":43210,
-   "max_party_size":6,
+   "max_party_size":12,
    "session_max_players_override":8,
-   "session_type":"ffa",
-   "playlist_code":12345,
+   "session_type":"teams",
+   "playlist_code":617790,
    "playlist_shuffle":true,
    "auto_balance_teams":true,
    "enable_telnet":false,
    "teams_series_length":7,
    "ffa_series_length":24,
-   "stats_url":"https://discord.gg/ucyaesh",
+   "stats_url":"https://discord.gg/jBj8tFuu2a",
    "clean_exit_minutes":60,
    "unclean_exit_minutes":90,
    "idle_exit_minutes":20,
    "show_tutorial":false,
    "team_names":[
-      "ladoo",
-      "barfi"
+      "CHAOS",
+      "ORDER"
    ],
    "team_colors":[
       [
@@ -33,9 +33,9 @@
          0.6
       ],
       [
-         0,
          1,
-         0.8
+         1,
+         1
       ]
    ],
    "enable_queue":true,

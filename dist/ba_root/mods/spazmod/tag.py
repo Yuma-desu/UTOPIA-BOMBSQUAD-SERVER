@@ -8,6 +8,21 @@ import bascenev1 as bs
 sett = setting.get_settings_data()
 
 
+# Per-role tag animations. Add a "taganim" array to any role in roles.json
+# with a list of (time, (r,g,b)) tuples, e.g.:
+#   "taganim": [[0.0, [1,0.6,0]], [1.0, [1,1,0]], [2.0, [1,0.6,0]]]
+# If not set, the default rainbow animation is used.
+ROLE_ANIMS = {
+    "owner": {0.0: (1.5, 0, 0), 0.15: (0.05, 0, 0), 0.3: (1.5, 0.1, 0.1),
+              0.45: (0.05, 0, 0), 0.6: (1.5, 0, 0), 0.75: (0.4, 0, 0),
+              0.9: (1.5, 0.05, 0.05), 1.05: (0.05, 0, 0), 1.2: (1.5, 0, 0)},
+}
+
+DEFAULT_ANIM = {0.2: (2, 0, 2), 0.4: (2, 2, 0), 0.6: (0, 2, 2),
+                0.8: (2, 0, 2), 1.0: (1, 1, 0), 1.2: (0, 1, 1),
+                1.4: (1, 0, 1)}
+
+
 def addtag(node, player):
     session_player = player.sessionplayer
     account_id = session_player.get_v1_account_id()
@@ -16,19 +31,21 @@ def addtag(node, player):
     roles = pdata.get_roles()
     p_roles = pdata.get_player_roles(account_id)
     tag = None
-    col = (0.5, 0.5, 1)  # default color for custom tags
+    col = (0.5, 0.5, 1)
+    role_name = None
     if account_id in customtag:
         tag = customtag[account_id]
     elif p_roles != []:
         for role in roles:
             if role in p_roles:
+                role_name = role
                 tag = roles[role]['tag']
                 col = (
                     0.7, 0.7, 0.7) if 'tagcolor' not in roles[role] else \
                     roles[role]['tagcolor']
                 break
     if tag:
-        Tag(node, tag, col)
+        Tag(node, tag, col, role_name=role_name)
 
 
 def addrank(node, player):
@@ -53,7 +70,8 @@ def addhp(node, spaz):
 
 
 class Tag(object):
-    def __init__(self, owner=None, tag="somthing", col=(1, 1, 1)):
+    def __init__(self, owner=None, tag="somthing", col=(1, 1, 1),
+                 role_name=None):
         self.node = owner
 
         mnode = bs.newnode('math',
@@ -93,16 +111,25 @@ class Tag(object):
                                        'h_align': 'center'
                                    })
         mnode.connectattr('output', self.tag_text, 'position')
+
+        # Pick animation: role-specific > role's custom "taganim" > default
+        anim_keys = None
         if sett["enableTagAnimation"]:
-            bs.animate_array(node=self.tag_text, attr='color', size=3, keys={
-                0.2: (2, 0, 2),
-                0.4: (2, 2, 0),
-                0.6: (0, 2, 2),
-                0.8: (2, 0, 2),
-                1.0: (1, 1, 0),
-                1.2: (0, 1, 1),
-                1.4: (1, 0, 1)
-            }, loop=True)
+            if role_name and role_name in ROLE_ANIMS:
+                anim_keys = ROLE_ANIMS[role_name]
+            elif role_name:
+                roles = pdata.get_roles()
+                if role_name in roles and "taganim" in roles[role_name]:
+                    anim_keys = {
+                        float(k): tuple(v) for k, v in
+                        roles[role_name]["taganim"]
+                    }
+            if anim_keys is None:
+                anim_keys = DEFAULT_ANIM
+
+        if anim_keys:
+            bs.animate_array(node=self.tag_text, attr='color', size=3,
+                             keys=anim_keys, loop=True)
 
 
 class Rank(object):

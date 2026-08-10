@@ -20,10 +20,10 @@ client = Bot(command_prefix='!', intents=intents)
 
 stats = {}
 livestatsmsgs = []
-logsChannelID = 859519868838608970
-liveStatsChannelID = 924697770554687548
+logsChannelID = 1536380990358949908
+liveStatsChannelID = 1536376151285702837
 liveChat = True
-token = ''
+token = 'MTUzNjM3OTUyMzgxNjM2MjAyNQ.GDTCOQ.jxPk5oDNsVDCgmsIgSr0t-7anrO_KuWcbqnUWU'
 logs = []
 
 

@@ -51,7 +51,14 @@ PATTERN = (
 )
 
 
+# Profanity filter is disabled — freedom of speech server.
+# Set to True to re-enable.
+FILTER_ENABLED = False
+
+
 def censor(message):
+    if not FILTER_ENABLED:
+        return message
     censored_message = re.sub(
         PATTERN,
         lambda match: "*" * len(match.group()),
