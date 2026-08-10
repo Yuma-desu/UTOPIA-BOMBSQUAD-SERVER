@@ -182,6 +182,6 @@
   "mfa" : {
     "enable": true,
     "enforce_for_all_players": false,
-    "enforce_for_accounts": [ "Sentium", "test" ]
+    "enforce_for_accounts": [ "bruh", "test" ]
   }
 }
