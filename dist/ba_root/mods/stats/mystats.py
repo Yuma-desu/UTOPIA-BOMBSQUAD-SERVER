@@ -241,14 +241,16 @@ class UpdateThread(threading.Thread):
             #     stats[account_id].pop('name_html')
             #     stats[account_id]['name'] = 'default'
             url = "http://bombsquadgame.com/bsAccountInfo?buildNumber=20258&accountID=" + account_id
-            data = urllib.request.urlopen(url)
-            if data is not None:
-                try:
-                    name = json.loads(data.read())["profileDisplayString"]
-                except ValueError:
-                    stats[account_id]['name'] = "???"
-                else:
-                    stats[account_id]['name'] = name
+            try:
+                data = urllib.request.urlopen(url, timeout=5)
+                if data is not None:
+                    try:
+                        name = json.loads(data.read()).get("profileDisplayString", "???")
+                        stats[account_id]['name'] = name if name else "???"
+                    except Exception:
+                        stats[account_id]['name'] = "???"
+            except Exception:
+                stats[account_id]['name'] = "???"
 
             # now increment their kills whether they were already there or not
 
@@ -272,25 +274,32 @@ class UpdateThread(threading.Thread):
 
 def getRank(acc_id):
     global ranks
-    if ranks == []:
-        refreshStats()
+    if not ranks:
+        # Don't block the game thread — just return None on first call
+        return None
     if acc_id in ranks:
         return ranks.index(acc_id) + 1
+    return None
 
 
 def updateTop3Names(ids):
     global top3Name
     names = []
-    for id in ids:
-        url = "http://bombsquadgame.com/bsAccountInfo?buildNumber=20258&accountID=" + id
-        data = urllib.request.urlopen(url)
-        if data is not None:
-            try:
-                name = json.loads(data.read())["profileDisplayString"]
-                if (not name):
-                    raise ValueError
-            except ValueError:
-                names.append("???")
-            else:
-                names.append(name)
+    stats = get_cached_stats()
+    for aid in ids:
+        name = None
+        # Try fetching from master server first
+        try:
+            url = "http://bombsquadgame.com/bsAccountInfo?buildNumber=20258&accountID=" + aid
+            data = urllib.request.urlopen(url, timeout=5)
+            if data is not None:
+                name = json.loads(data.read()).get("profileDisplayString")
+        except Exception:
+            pass
+        # Fall back to name from local stats
+        if not name and aid in stats:
+            name = stats[aid].get("name", "???")
+        if not name:
+            name = "???"
+        names.append(name)
     top3Name = names

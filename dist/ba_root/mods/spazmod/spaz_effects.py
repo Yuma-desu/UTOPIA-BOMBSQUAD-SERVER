@@ -88,6 +88,12 @@ class NewPlayerSpaz(PlayerSpaz):
 
         babase._asyncio._g_asyncio_event_loop.create_task(self.set_effects())
 
+    def handlemessage(self, msg):
+        if isinstance(msg, bs.DieMessage):
+            self._activations = []
+            self.effects = []
+        super().handlemessage(msg)
+
     async def set_effects(self):
         try:
             account_id = self._player._sessionplayer.get_v1_account_id()
