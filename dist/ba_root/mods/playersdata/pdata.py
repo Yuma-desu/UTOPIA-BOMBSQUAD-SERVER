@@ -607,12 +607,13 @@ def get_custom() -> dict:
     """
     if CacheData.custom == {}:
         custom = _safe_load_json(PLAYERS_DATA_PATH + "custom.json")
-        if "customeffects" in custom:
-            for account_id in custom["customeffects"]:
-                custom["customeffects"][account_id] = [
-                    custom["customeffects"][account_id]] if type(
-                    custom["customeffects"][account_id]) is str else \
-                    custom["customeffects"][account_id]
+        custom.setdefault("customeffects", {})
+        custom.setdefault("customtag", {})
+        for account_id in custom["customeffects"]:
+            custom["customeffects"][account_id] = [
+                custom["customeffects"][account_id]] if type(
+                custom["customeffects"][account_id]) is str else \
+                custom["customeffects"][account_id]
         CacheData.custom = custom
     return CacheData.custom
 
