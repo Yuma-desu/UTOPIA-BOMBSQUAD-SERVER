@@ -112,9 +112,8 @@ def get_profiles() -> dict:
             print(e)
             print("Exception occurred, falling back")
             CacheData.profiles = profiles
-            return profiles
-    else:
-        return CacheData.profiles
+
+    return CacheData.profiles
 
 
 def get_profiles_archive_index():
