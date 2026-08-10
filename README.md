@@ -41,36 +41,21 @@ tmux new -s 43210
 ```
 
 ### Clone & configure
-
-> **Note:** This repository is private. GitHub no longer supports password authentication.
-> Use one of the following to clone:
-
-**Option A — Personal Access Token (classic):**
-1. Go to [GitHub Settings → Tokens](https://github.com/settings/tokens) and generate a token with `repo` scope
-2. Use your username + token as the password when prompted:
 ```sh
 git clone --depth=1 https://github.com/Yuma-desu/UTOPIA-BOMBSQUAD-SERVER
-# Username: your-github-username
-# Password: ghp_yourPersonalAccessToken
-```
-
-**Option B — SSH key (recommended):**
-```sh
-# Generate a key and add the public key to GitHub first, then:
-git clone --depth=1 git@github.com:Yuma-desu/UTOPIA-BOMBSQUAD-SERVER.git
-```
-
-Then navigate in:
-```sh
 cd UTOPIA-BOMBSQUAD-SERVER
 ```
 
-### Edit the server config
-Edit `config.json` in the root directory to set server name, port, admins, playlist, team names, team colors, etc.
+### Edit your configs
+The repo ships with **placeholder values**. Replace them with your real settings:
 
 ```sh
-nano config.json
+nano config.json           # server name, port, admins, playlist, etc.
+nano dist/ba_root/mods/setting.json   # mod features, discord bot, webhooks, etc.
+nano dist/ba_root/mods/playersData/roles.json  # add your PB-ID as owner
 ```
+
+> Keep sensitive tokens and passwords out of git — don't commit them back.
 
 ### Make binaries executable
 ```sh
