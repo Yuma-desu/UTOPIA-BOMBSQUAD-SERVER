@@ -4,7 +4,9 @@ __pycache__/
 .mypy_cache/
 .bsuuid
 .bsac2
-dist/ba_root/mods/playersdata/*.json*
+dist/ba_root/mods/playersdata/profiles*.json*
+dist/ba_root/mods/playersdata/subscri*.json*
+dist/ba_root/mods/playersdata/*.backup
 dist/ba_root/mods/serverdata/*.log
 dist/ba_root/mods/serverdata/*.log*
 dist/ba_root/mods/serverdata/*.json

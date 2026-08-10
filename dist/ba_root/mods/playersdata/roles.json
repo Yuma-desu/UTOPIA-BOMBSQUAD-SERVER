@@ -1,0 +1,89 @@
+{
+    "owner": {
+        "tag": "\\cCALAMITY\\c",
+        "tagcolor": [
+            1,
+            0.6,
+            0.4
+        ],
+        "commands": [
+            "ALL"
+        ],
+        "ids": [
+            "pb-IF4eUGQzVA=="
+        ]
+    },
+    "admin": {
+        "tag": "\ue043𐌙𐌊𐌕I\ue043",
+        "tagcolor": [
+            1,
+            1,
+            1
+        ],
+        "commands": [
+            "ALL"
+        ],
+        "ids": [
+            "pb-IF4uUGEiFg=="
+        ]
+    },
+    "vip": {
+        "tag": "vip",
+        "tagcolor": [
+            1,
+            1,
+            1
+        ],
+        "commands": [],
+        "ids": []
+    },
+    "smoothy": {
+        "tag": "smoothy",
+        "tagcolor": [
+            1,
+            1,
+            1
+        ],
+        "commands": [],
+        "ids": []
+    },
+    "pros": {
+        "tag": "pros",
+        "tagcolor": [
+            1,
+            1,
+            1
+        ],
+        "commands": [],
+        "ids": []
+    },
+    "top5": {
+        "tag": "top5",
+        "tagcolor": [
+            1,
+            1,
+            1
+        ],
+        "commands": [],
+        "ids": [
+            "pb-IF4VAk4a",
+            "pb-IF4RU2ECAg=="
+        ]
+    },
+    "bypass-warn": {
+        "tag": "",
+        "tagcolor": [
+            1,
+            1,
+            1
+        ],
+        "commands": [],
+        "ids": [
+            "pb-IF5XUm9eAg==",
+            "pb-IF43VUwlAg==",
+            "pb-IF4iVUc5Cg==",
+            "pb-IF4vNnMJ",
+            "pb-IF4TVWwZUQ=="
+        ]
+    }
+}
