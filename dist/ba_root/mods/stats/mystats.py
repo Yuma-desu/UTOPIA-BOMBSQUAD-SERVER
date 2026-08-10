@@ -80,11 +80,8 @@ def dump_stats(s: dict):
     s = {"startDate": seasonStartDate.strftime("%d-%m-%Y"), "stats": s}
     if os.path.exists(statsfile):
         shutil.copyfile(statsfile, statsfile + ".backup")
-        with open(statsfile, 'w', encoding='utf8') as f:
-            f.write(json.dumps(s, indent=4, ensure_ascii=False))
-            f.close()
-    else:
-        print('Stats file not found!')
+    with open(statsfile, 'w', encoding='utf8') as f:
+        f.write(json.dumps(s, indent=4, ensure_ascii=False))
 
 
 def get_stats_by_id(account_id: str):
